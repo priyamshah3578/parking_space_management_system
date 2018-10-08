@@ -1,0 +1,41 @@
+import numpy as np
+import cv2
+import matplotlib.pyplot as plt
+img=cv2.imread('Webp.net-resizeimage.jpg',1)
+img1=cv2.imread('Webp.net-resizeimage (1).jpg',1)
+
+#plt.imshow(img,cmap='gray',interpolation='bicubic')
+#plt.plot([50,100],[80,100],'c',linewidth=5)
+#plt.show()
+#add=cv2.addWeighted(img,0.6,img1,0.4,0)
+#img[50:100,50:100]=[123,234,123]
+#face=img[37:67,34:89]
+#img[0:30,0:55]=face
+#add=cv2.addWeighted(img[0:300,0:300],0.6,img1[0:300,0:300],0.4,0)
+#add=cv2.add(img[0:300,0:300],img1[0:300,0:300])
+#cv2.imshow('add',add)
+#rows,cols,channels=img1.shape
+#roi=img1[0:rows,0:cols]
+#img2gray=cv2.cvtColor(img1,cv2.COLOR_BGR2GRAY)
+retval,threshold=cv2.threshold(img,90,255,cv2.THRESH_BINARY)
+#mask_inv=cv2.bitwise_not(mask)
+#img_bg=cv2.bitwise_and(roi,roi,mask=mask_inv)
+#img1_bg=cv2.bitwise_and(img1,img1,mask=mask)
+#dst=cv2.add(img_bg,img1_bg)
+#img[0:rows,0:cols]=dst
+
+grayscaled=cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
+
+retval2,threshold2=cv2.threshold(grayscaled,90,255,cv2.THRESH_BINARY)
+gaus=cv2.adaptiveThreshold(grayscaled,255,cv2.ADAPTIVE_THRESH_GAUSSIAN_C,cv2.THRESH_BINARY,115,1)
+
+
+
+cv2.imshow('res',img)
+cv2.imshow('threshold',threshold)
+cv2.imshow('threshold',threshold2)
+cv2.imshow('gaus',gaus)
+#cv2.imshow('dst',dst)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
